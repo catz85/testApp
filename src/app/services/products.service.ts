@@ -4,22 +4,19 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 
 import { AuthenticationService } from './auth.service';
-import { UserModel } from '../models/user.model';
+import { ProductModel } from '../models/product.model';
 
 @Injectable()
-export class UserService {
+export class ProductService {
     constructor(
         private http: Http,
-        private authenticationService: AuthenticationService) {
+        private authenticationService: AuthenticationService ) {
     }
 
-    getUsers(): Observable<UserModel[]> {
-        // add authorization header with jwt token
-        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authenticationService.token });
-        let options = new RequestOptions({ headers: headers });
-
-        // get users from api
-        return this.http.get('/api/users', options)
-            .map((response: Response) => response.json());
+    getProducts(): Observable<ProductModel[]> {
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authenticationService.getToket() });
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        return this.http.get(this.authenticationService.baseUrl + '/Products', {headers})
+            .map((response) => response.json());
     }
 }

@@ -1,12 +1,12 @@
-export class UserModel {
-    public username: string;
-    public password: string;
-    public expired: number;
-    public acess_token: string;
-    constructor(username: string, password: string, expired: number, acess_token: string) {
-        this.username = username;
-        this.password = password;
-        this.expired = expired;
-        this.acess_token = acess_token;
+export class ProductModel {
+    public productID: number;
+    public name: string;
+    public price: number;
+    public description: string;
+    constructor(productID: number, name: string, price: number, description: string) {
+        this.productID = productID;
+        this.name = name;
+        this.price = price;
+        this.description = description;
     }
 }
